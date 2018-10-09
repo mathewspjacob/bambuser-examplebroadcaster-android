@@ -32,3 +32,5 @@ The sample code in this project contains the bare minimum required to start broa
 * [Bambuser Docs](https://bambuser.com/docs)
 
 * [Bambuser AB](https://bambuser.com)
+
+* Our guide for building a broadcaster app from scratch can be found at [Broadcaster guide](https://bambuser.com/docs/broadcasting/android/).
