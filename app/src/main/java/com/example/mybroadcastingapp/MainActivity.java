@@ -1,31 +1,31 @@
-package com.bambuser.examplebroadcaster;
+package com.example.mybroadcastingapp;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.support.v4.app.ActivityCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceView;
+import android.view.View;
+import android.view.WindowManager;
+import android.widget.Button;
 
 import com.bambuser.broadcaster.BroadcastStatus;
 import com.bambuser.broadcaster.Broadcaster;
 import com.bambuser.broadcaster.CameraError;
 import com.bambuser.broadcaster.ConnectionError;
 
-import android.view.View;
-import android.view.WindowManager;
-import android.widget.Button;
+public class MainActivity extends AppCompatActivity {
+    private static final String LOGTAG = "Mybroadcastingapp";
 
-public class BroadcasterActivity extends AppCompatActivity {
-    private static final String LOGTAG = "BroadcasterActivity";
-
-    private static final String APPLICATION_ID = "CHANGE_ME";
+    private static final String APPLICATION_ID = "PLEASE INSERT YOUR APPLICATION SPECIFIC ID PROVIDED BY BAMBUSER";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_broadcaster);
+        setContentView(R.layout.activity_main);
         mPreviewSurface = findViewById(R.id.PreviewSurfaceView);
         mBroadcaster = new Broadcaster(this, APPLICATION_ID, mBroadcasterObserver);
         mBroadcaster.setRotation(getWindowManager().getDefaultDisplay().getRotation());
@@ -39,14 +39,13 @@ public class BroadcasterActivity extends AppCompatActivity {
                     mBroadcaster.stopBroadcast();
             }
         });
-    }
 
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();
         mBroadcaster.onActivityDestroy();
     }
-
     @Override
     public void onPause() {
         super.onPause();
@@ -56,9 +55,6 @@ public class BroadcasterActivity extends AppCompatActivity {
     @Override
     public void onResume() {
         super.onResume();
-        mBroadcaster.setCameraSurface(mPreviewSurface);
-        mBroadcaster.onActivityResume();
-        mBroadcaster.setRotation(getWindowManager().getDefaultDisplay().getRotation());
         if (!hasPermission(Manifest.permission.CAMERA)
                 && !hasPermission(Manifest.permission.RECORD_AUDIO))
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA,
@@ -67,6 +63,10 @@ public class BroadcasterActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.RECORD_AUDIO}, 1);
         else if (!hasPermission(Manifest.permission.CAMERA))
             ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.CAMERA}, 1);
+        mBroadcaster.setCameraSurface(mPreviewSurface);
+        mBroadcaster.onActivityResume();
+        mBroadcaster.setRotation(getWindowManager().getDefaultDisplay().getRotation());
+
     }
 
     private boolean hasPermission(String permission) {
@@ -114,4 +114,5 @@ public class BroadcasterActivity extends AppCompatActivity {
     SurfaceView mPreviewSurface;
     Broadcaster mBroadcaster;
     Button mBroadcastButton;
+
 }
