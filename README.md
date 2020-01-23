@@ -24,7 +24,7 @@ The sample code in this project contains the bare minimum required to start broa
 6. Import the `ExampleBroadcaster` project in Android Studio.
 7. Edit `ExampleBroadcaster/libbambuser/build.gradle` and point it to the version of the `.aar` file.
 8. Generate an `applicationId` at https://dashboard.bambuser.com/developer
-9. Open the `BroadcasterActivity.java` file in Android Studio and insert the `applicationId` generated above.
+9. Open the `MainActivity.java` file in Android Studio and insert the `applicationId` generated above.
 10. Run the sample code on your device and start a broadcast. The broadcast should show up on https://dashboard.bambuser.com/content
 
 ## More information
